@@ -47,7 +47,7 @@ export function addOneBook(s:Book) {
   const insertRelation = 'INSERT INTO author_book (author_id, book_id) VALUES (?,?)'
   function getauthorid(name: string) {
     const sql1 = `
-    SELECT 
+    SELECT
     FROM author
     WHERE name = ?
     `
