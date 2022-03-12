@@ -13,7 +13,7 @@ export const db = new sqlite3.Database("db.sqlite",
 db.run(
 `
 CREATE TABLE author(
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
 )
 `

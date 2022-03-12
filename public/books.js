@@ -1,6 +1,7 @@
 function fillBooks(books) {
     console.log(books)
     const lista = document.getElementById("listofbooks")
+    lista.innerHTML = ""
     for (const idx in books) {
         const li = createBookBox(books[idx])
         lista.append(li)
@@ -28,8 +29,10 @@ function createBookBox(book) {
     
     //author:
     const author = document.createElement("h3")
-    author.innerText = book.authors
+    author.innerText = book.authors // THIS DOES NOT WORK? ARRAY ITERATOR?
     div.append(author)
+
+    console.log(book.authors)
     
     //ratings:
     const yellowstar = document.createElement("span")
@@ -42,6 +45,10 @@ function createBookBox(book) {
     star.innerText = '★'.repeat(num_gs)
     div.append(yellowstar)
     div.append(star)
+
+    const rating_num = document.createElement("span")
+    rating_num.innerHTML = (' (' + book.numberrating +')<br>')
+    div.append(rating_num)
     
     return li
 }
@@ -68,7 +75,7 @@ function addNewBook() {
 }
 
 function applySearch() {
-    const input = document.getElementById("searchbox")
+    const input = document.getElementById("searchbar")
     console.log(input)
     const text = input.value
     loadAndFillBooks(text)
@@ -97,20 +104,4 @@ function togglefunction(id) {
     } else {
         smenu.className = "submenu";
     }
-}
-
-//function for searching books
-function searchFunction() {
-    let bookboxes = document.querySelectorAll('.bookbox');
-    let booktitle = document.querySelectorAll('.title')
-    let userinput = document.getElementById('searchbar').value;
-    userinput = userinput.toLowerCase();
-    for (let i = 0; i < bookboxes.length; i++) {
-        if (booktitle[i].innerText.toLowerCase().includes(userinput)) {
-            bookboxes[i].className = ("bookbox");
-        } else {
-            bookboxes[i].className = ("bookbox hidden");
-        }
-    }
-
 }
