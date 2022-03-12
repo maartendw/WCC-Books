@@ -1,21 +1,49 @@
-// This is the code for the client application
-// This does not contain the solution to the second assignment 
-
-function createBookBox(book) {
-    // This is to be replaced by the appropriate code to construct the HTML elements in JavsScript
-    const li = document.createElement("LI")
-    li.innerHTML = '<div class="bookbox"><img src="https://covers.openlibrary.org/b/id/9251896-L.jpg"><div><h2>Ubik</h2><h3>Philip K. Dick</h3></div><div><span class="star yellowstar">★</span><span class="star yellowstar">★</span><span class="star yellowstar">★</span><span class="star yellowstar">★</span><span class="star">★</span><span>(300)</span></div></div>'
-    return li
-}
-
 function fillBooks(books) {
     console.log(books)
-    const list = document.getElementById("listofbooks")
-    list.innerHTML = ""
+    const lista = document.getElementById("listofbooks")
     for (const idx in books) {
         const li = createBookBox(books[idx])
-        list.append(li)
+        lista.append(li)
     }
+}
+
+function createBookBox(book) {
+    const li = document.createElement("LI")
+    li.setAttribute('class', 'bookbox')
+    
+    //div with book content:
+    const div = document.createElement("div")
+    li.append(div)
+    
+    //book image:
+    const img = document.createElement("img")
+    img.src = book.image
+    div.append(img)
+    
+    //title:
+    const title = document.createElement("h3")
+    title.innerText = book.title
+    title.setAttribute('class', 'title')
+    div.append(title)
+    
+    //author:
+    const author = document.createElement("h3")
+    author.innerText = book.authors
+    div.append(author)
+    
+    //ratings:
+    const yellowstar = document.createElement("span")
+    yellowstar.setAttribute('class', 'yellowstar')
+    const num_ys = book.rating
+    yellowstar.innerText = '★'.repeat(num_ys)
+    const star = document.createElement("span")
+    star.setAttribute('class', 'star')
+    const num_gs = 5 - num_ys 
+    star.innerText = '★'.repeat(num_gs)
+    div.append(yellowstar)
+    div.append(star)
+    
+    return li
 }
 
 function loadAndFillBooks(search) {
@@ -27,6 +55,7 @@ function loadAndFillBooks(search) {
     .then(data => data.json())
     .then(books => { fillBooks(books) })
 }
+
 
 function addNewBook() {
     fetch("/api/books", {
@@ -59,3 +88,29 @@ window.onload = () => {
     installOtherEventHandlers()
 }
 
+
+//toggle for collapsable menus
+function togglefunction(id) {
+    let smenu = document.getElementById(id);
+    if (smenu.className === "submenu") {
+        smenu.className = ('submenu hidden');
+    } else {
+        smenu.className = "submenu";
+    }
+}
+
+//function for searching books
+function searchFunction() {
+    let bookboxes = document.querySelectorAll('.bookbox');
+    let booktitle = document.querySelectorAll('.title')
+    let userinput = document.getElementById('searchbar').value;
+    userinput = userinput.toLowerCase();
+    for (let i = 0; i < bookboxes.length; i++) {
+        if (booktitle[i].innerText.toLowerCase().includes(userinput)) {
+            bookboxes[i].className = ("bookbox");
+        } else {
+            bookboxes[i].className = ("bookbox hidden");
+        }
+    }
+
+}

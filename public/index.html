@@ -1,55 +1,55 @@
 <HTML>
 
-<HEAD>
-    <TITLE>My Most Favourite Books</TITLE>
-    <META charset="utf8" />
-    <LINK rel="stylesheet" href="books.css" />
-    <SCRIPT src="books.js"></SCRIPT>
-    <STYLE>
-        .hidden {
-            display:none
-        }
-    </STYLE>
-</HEAD>
+    <HEAD>
+        <TITLE>My Favourite Books</TITLE>
+        <META charset="utf8" />
+        <LINK rel="stylesheet" href="books.css" />
+        <SCRIPT src="books.js"></SCRIPT>
+        <STYLE>
+            .hidden {
+                display:none
+            }
+        </STYLE>
+    </HEAD>
 
-<BODY>
-    <HEADER>
-        <DIV id="topbar"></DIV>
-        <DIV id="titlebox">
-            <H1 id="title">My Most Favourite Books</H1>
-        </DIV>
-        <NAV>
-            <DIV id="menuicon">&#9776;</DIV>
-            <UL id="menuitemlist">
-                <LI class="menuitem"> <a href="">Library</a> 
-                    <ul class="submenu hidden">
-                        <li class="submenuitems">menu entry 1</li>
-                        <li class="submenuitems">menu entry 2</li>
-                        <li class="submenuitems">menu entry 3</li>
+    <BODY>
+        <HEADER>
+            <DIV id="topbar"></DIV>
+            <DIV id="titlebox">
+                <H1 id="title">My Favourite Books</H1>
+            </DIV>
+            <NAV>
+                <DIV id="menuicon">&#9776;</DIV>
+                <UL id="menuitemlist">
+                    <LI> <a  href="#" onclick="togglefunction('submenu1')">Library</a> 
+                    <ul class='submenu hidden' id="submenu1">
+                        <li class='submenuitems'>item 1</li>
+                        <li class='submenuitems'>item 2</li>
+                        <li class='submenuitems'>item 3</li>
                     </ul>
                     </LI>
-                <LI class="menuitem"> <a href="">Collections</a> 
-                    <ul class="submenu hidden">
-                        <li class="submenuitems">menu entry 1</li>
-                        <li class="submenuitems">menu entry 2</li>
-                        <li class="submenuitems">menu entry 3</li>
-                    </ul>                    
-                </LI>
-                <LI class="menuitem"> <a href="">Loans</a> 
-                    <ul class="submenu">
-                        <li class="submenuitems">menu entry 1</li>
-                        <li class="submenuitems">menu entry 2</li>
-                        <li class="submenuitems">menu entry 3</li>
-                    </ul>
-                </LI>
-            </UL>
-            <DIV id="searchicon">&#x1F50D;</DIV>
-            <DIV id="searchboxarea">
-                <input id="searchbox">
-                <button id="searchbutton">Search</button>
-            </DIV>
-        </NAV>
-    </HEADER>
+                    <LI><a  href="#" onclick="togglefunction('submenu2')">Collections</a>
+                        <ul class='submenu hidden' id=submenu2>
+                            <li class='submenuitems'>item 1</li>
+                            <li class='submenuitems'>item 2</li>
+                            <li class='submenuitems'>item 3</li>
+                        </ul>
+                    </LI>
+                    <LI> <a  href="#" onclick="togglefunction('submenu3')">Loans</a> 
+                        <ul class='submenu hidden' id="submenu3">
+                            <li class='submenuitems'>item 1</li>
+                            <li class='submenuitems'>item 2</li>
+                            <li class='submenuitems'>item 3</li>
+                        </ul>
+                    </LI>
+                </UL>
+                <DIV id="searchicon">&#x1F50D;</DIV>
+                <DIV id="searchbox">
+                    <input id='searchbar' name="searchbox" type='text' placeholder="search book">
+                    <button onclick="searchFunction()" >Search</button>
+                </DIV>
+            </NAV>
+        </HEADER>
     <ASIDE id="sidebar">
         <h3>Maria Diniz</h3>
         <p><a href="">Profile</a></p>

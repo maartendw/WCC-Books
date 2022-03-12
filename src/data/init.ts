@@ -28,7 +28,7 @@ CREATE TABLE author(
 db.run(
 `
 CREATE TABLE book(
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     image TEXT,
     rating INTEGER,
