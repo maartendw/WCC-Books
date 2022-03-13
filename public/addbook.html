@@ -4,7 +4,7 @@
         <TITLE>My Favourite Books</TITLE>
         <META charset="utf8" />
         <LINK rel="stylesheet" href="books.css" />
-        <SCRIPT src="books.js"></SCRIPT>
+        <SCRIPT src="addbook.js"></SCRIPT>
         <STYLE>
             .hidden {
                 display:none
@@ -27,10 +27,6 @@
                             <li class='submenuitems'><a href="statistics.html" >Statistics</a></li>
                     </ul>
                 </UL>
-                <DIV id="searchicon">&#x1F50D;</DIV>
-                <DIV id="searchbox">
-                    <input id="searchbar" type='text' placeholder="search book">
-                    <button id="searchbutton" onclick="applsySearch()">Search</button>
                 </DIV>
             </NAV>
         </HEADER>
@@ -47,7 +43,21 @@
         <p><a href="">All timers (10)</a></p>
     </ASIDE>
     <SECTION>
-        <p>Add Book Page</p>
+        <h1>Add Book Page</h1>
+        <form id="addbook">
+            <label for="booktitle">Title:</label><br>
+            <input type="text" id="booktitle"><br>
+            <label for="image">Image Link:</label><br>
+            <input type="text" id="image"><br>
+            <label for="rating">Rating:</label><br>
+            <input type="number" id="rating"><br>
+            <label for="numberratings">Number of ratings:</label><br>
+            <input type="number" id="numberratings"><br>
+            <label for="authors">Authors:</label><br>
+            <input type="text" id="authors"><br>
+        </form>              
+        <button id="addbooksubmitbutton" onclick="getFieldValues()">Submit</button>
+
     </SECTION>
     <FOOTER>
         <div>

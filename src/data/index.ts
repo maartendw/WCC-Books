@@ -49,7 +49,7 @@ export function addOneBook(s:Book) {
   const insertBook = 'INSERT INTO book (title, image, rating, numberrating) VALUES (?,?,?,?)' // autoincrement, so no id provided
   const insertRelation = 'INSERT INTO author_book (author_id, book_id) VALUES (?,?)'
 
-  db.run(insertBook, [s.title, s.image, s.rating, s.numberrating]) //add book in book table
+  db.run(insertBook, [s.title, s.image, s.rating, s.numberrating]) // add book in book table
 
   s.authors.forEach(author => {
     const sql1 = `
@@ -62,22 +62,23 @@ export function addOneBook(s:Book) {
     db.get(sql1, params1, (err, res) => {
       if( err ) {
         console.log('no author with id'+err)
-        db.run(insertAuthor, [author]) //add author
+        db.run(insertAuthor, [author]) // add author
         db.get(sql1, params1, (res2) => {
-          db.run(insertRelation, [res2, s.id])}) //add relation
+          console.log('no auth --> auht made author with id'+res2)
+          db.run(insertRelation, [res2, s.id])}) // add relation
 
       } else {
-        console.log('author with id'+res)
+        console.log('author with exists id'+res)
         db.run(insertRelation, [res, s.id])
       }
     })
   })
 }
 
-//OLD
+// OLD
 
 //   function getauthorid(name: string) {
-    
+
 //     const params1: string[] = [name]
 //     db.get(sql1, params1, (err, res) => {
 //       if (err) {
