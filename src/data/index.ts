@@ -52,6 +52,22 @@ export function addOneBook(s:Book) {
   db.run(insertBook, [s.title, s.image, s.rating, s.numberrating]) // add book in book table
   // here we have to find something to get the id of the just written book
 
+  const sqlBook = `
+  SELECT id
+  FROM book
+  ORDER BY id DESC LIMIT 1`
+
+  db.get(sqlBook, (errB, rowB) => {
+
+    if (errB) {
+      return console.error(errB.message);
+    } else {
+      console.log('book located' + rowB.id)
+      const bookid =  rowB.id // problem
+    }
+
+})
+
   console.log('book created in db')
 
   db.serialize(() => {
@@ -72,7 +88,7 @@ export function addOneBook(s:Book) {
       } else {
       if (typeof row !== 'undefined'){
         console.log('recognized author in db: ' + author)
-        db.run(insertRelation, [row.id, s.id])
+        db.run(insertRelation, [row.id, bookid])
         console.log('relation written' + row.id + "&" + s.id)
       } else {
         console.log('UNrecognized author in db: ' + author + ". Adding...")
@@ -83,7 +99,7 @@ export function addOneBook(s:Book) {
             return console.error(err2.message);
           } else {
             console.log('author now recognized in db: ' + author)
-            db.run(insertRelation, [row2.id, s.id])
+            db.run(insertRelation, [row2.id, bookid])
             console.log('relation written' + row2.id + "&" + s.id)
           }
 
