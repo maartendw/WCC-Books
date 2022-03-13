@@ -67,7 +67,7 @@ export const books = [
         authors: [
             "Anne Frank"
         ],
-        image: "https://covers.openlibrary.org/b/id/9251896-L.jpg",
+        image: "https://covers.openlibrary.org/b/id/12597986-L.jpg",
         rating: 5,
         numberrating: 150,
     },
