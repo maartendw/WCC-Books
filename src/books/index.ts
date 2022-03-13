@@ -85,7 +85,7 @@ export const books = [
         id: 8,
         title: "Is Paris Burning",
         authors: [
-            "Larry Collins, Dominique Lapierre"
+            "Larry Collins", "Dominique Lapierre"
         ],
         image: "https://covers.openlibrary.org/b/olid/OL21794948M-M.jpg",
         rating: 5,
@@ -95,7 +95,7 @@ export const books = [
         id: 9,
         title: "Software engineering: a practitioner's approach",
         authors: [
-            "Roger S. Pressman, Bruce Maxim"
+            "Roger S. Pressman", "Bruce Maxim"
         ],
         image: "https://covers.openlibrary.org/b/id/10617761-L.jpg",
         rating: 3,
@@ -235,7 +235,7 @@ export const books = [
         id: 23,
         title: "The adventures of Tom Sawyer",
         authors: [
-            "Mark Twain, William Dufris"
+            "Mark Twain", "William Dufris"
         ],
         image: "https://covers.openlibrary.org/b/id/11394793-L.jpg",
         rating: 5,
