@@ -50,32 +50,97 @@ export function addOneBook(s:Book) {
   const insertRelation = 'INSERT INTO author_book (author_id, book_id) VALUES (?,?)'
 
   db.run(insertBook, [s.title, s.image, s.rating, s.numberrating]) // add book in book table
+  // here we have to find something to get the id of the just written book
+
+  console.log('book created in db')
+
+  db.serialize(() => {
 
   s.authors.forEach(author => {
-    const sql1 = `
-                  SELECT id
+
+    const sqlAuthor = `
+                  SELECT *
                   FROM author
-                  WHERE name = ?
-                  `
-    const params1: string[] = [author]
+                  WHERE name = ?`
 
-    db.get(sql1, params1, (err, res) => {
-      if( err ) {
-        console.log('no author with id'+err)
-        db.run(insertAuthor, [author]) // add author
-        db.get(sql1, params1, (res2) => {
-          console.log('no auth --> auht made author with id'+res2)
-          db.run(insertRelation, [res2, s.id])}) // add relation
+    const paramsAuthor:string[] = [author]
 
+    db.get(sqlAuthor, paramsAuthor, (err, row) => {
+
+      if (err) {
+        return console.error(err.message);
       } else {
-        console.log('author with exists id'+res)
-        db.run(insertRelation, [res, s.id])
-      }
-    })
-  })
-}
+      if (typeof row !== 'undefined'){
+        console.log('recognized author in db: ' + author)
+        db.run(insertRelation, [row.id, s.id])
+        console.log('relation written' + row.id + "&" + s.id)
+      } else {
+        console.log('UNrecognized author in db: ' + author + ". Adding...")
+        db.run(insertAuthor, [author])
+        db.get(sqlAuthor, paramsAuthor, (err2, row2) => {
 
-// OLD
+          if (err2) {
+            return console.error(err2.message);
+          } else {
+            console.log('author now recognized in db: ' + author)
+            db.run(insertRelation, [row2.id, s.id])
+            console.log('relation written' + row2.id + "&" + s.id)
+          }
+
+      })
+
+      }
+
+
+  }
+
+
+  }
+    )
+
+  })}
+
+)}
+
+
+
+// OLD but newer
+//   s.authors.forEach(author => {
+//     const sql1 = `
+//                   SELECT id
+//                   FROM author
+//                   WHERE name = ?
+//                   `
+//     const params1: string[] = [author]
+//     console.log("sql1 defined")
+
+//     db.get(sql1, params1, (err, res) => {
+//       if( err ) {
+//         console.log("error in database: "+err)
+//       } else {
+//         if (typeof res === 'undefined') {
+//           console.log('author not yet in db, adding...')
+//           db.run(insertAuthor, [author]) // add author
+//           console.log('author added')
+//           // now get its id and add the relation
+//           db.get(sql1, params1, (err2, res2) => {
+//             if( err2 ) {
+//               console.log("error in database: "+ err2)
+//             } else {
+//               console.log('author is (!) now in db and adding relation...')
+//               db.run(insertRelation, [res2.id, s.id])
+//         }})}
+//         console.log('author already known in db, adding relation...')
+//         db.run(insertRelation, [res.id, s.id]) // add relation
+//       }
+//     })
+//   })
+// }
+
+
+
+
+// OLD ------------
 
 //   function getauthorid(name: string) {
 
