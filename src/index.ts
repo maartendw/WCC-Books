@@ -31,42 +31,15 @@ app.post('/api/books', (req,res) => {
     let body = ""
     req
     .on('data', (data) => body += data)
-    .on('end', () => { addOneBook(JSON.parse(body));
+    .on('end', () => { addOneBook(JSON.parse(body))
     res.status(200)
     res.send()
-})// 400 if not succesful, or not all fiedls filled
+    })
+
 })
+
+// Add 400 if not succesful, or not all fiedls filled
 
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );
 } );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
