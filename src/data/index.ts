@@ -90,7 +90,7 @@ export function addOneBook(s:Book) {
 
       const authorIDold = JSON.stringify(row.id)
       console.log(author + ' - author already in database with ID - ' + authorIDold)
-      // Fetch ID auf newly inserted author
+      // Fetch ID book ID
       db.get(sqlBook,(err2, row2) => {
         const bookIDnew = JSON.stringify(row2.id)
       // Insert author / book relation with the corresponding IDs
@@ -103,3 +103,23 @@ export function addOneBook(s:Book) {
 
   })}
 
+
+export function getbookratings(fn:(entries:[]) => void) {
+
+  const sqlbookratings = `SELECT COUNT(id) as count, rating
+                       FROM book
+                       GROUP BY rating;`
+
+  return db.get(sqlbookratings,(err, rows) => {
+    console.log('getbookratings function activated')
+    if (err) {
+      console.log('error connecting to database')
+      fn([])
+    } else {
+
+      // console.log(rows)
+      fn(rows)
+    }
+
+  })
+}

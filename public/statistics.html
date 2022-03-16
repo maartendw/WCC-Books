@@ -1,10 +1,10 @@
 <HTML>
-
     <HEAD>
         <TITLE>My Favourite Books</TITLE>
         <META charset="utf8" />
         <LINK rel="stylesheet" href="books.css" />
         <SCRIPT src="books.js"></SCRIPT>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
         <STYLE>
             .hidden {
                 display:none
@@ -23,15 +23,10 @@
                 <UL id="menuitemlist">
                     <LI> <a href="#" onclick="togglefunction('submenu1')">Menu</a> 
                         <ul class='submenu hidden' id="submenu1">
-                            <li class='submenuitems'><a href="index.html" >Home</a></li>
-                            <li class='submenuitems'><a href="addbook.html" >Add Book</a></li>
+                            <li class='submenuitems'><a href="index.html">Home</a></li>
+                            <li class='submenuitems'><a href="addbook.html">Add Book</a></li>
                     </ul>
                 </UL>
-                <DIV id="searchicon">&#x1F50D;</DIV>
-                <DIV id="searchbox">
-                    <input id="searchbar" type='text' placeholder="search book">
-                    <button id="searchbutton" onclick="applsySearch()">Search</button>
-                </DIV>
             </NAV>
         </HEADER>
     <ASIDE id="sidebar">
@@ -47,7 +42,8 @@
         <p><a href="">All timers (10)</a></p>
     </ASIDE>
     <SECTION>
-        <p>statistics</p>
+        <canvas id="myChart1" width="800" height="500"></canvas>
+        <SCRIPT src="statistics.js"></SCRIPT>
     </SECTION>
     <FOOTER>
         <div>

@@ -32,7 +32,7 @@ function createBookBox(book) {
     author.innerText = book.authors // THIS DOES NOT WORK? ARRAY ITERATOR?
     div.append(author)
 
-    console.log(book.authors)
+    // console.log(book.authors)
     
     //ratings:
     const yellowstar = document.createElement("span")
