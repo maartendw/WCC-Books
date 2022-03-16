@@ -1,61 +1,77 @@
-function getbookratings() {
-    console.log('GET request')
-    fetch("/api/books/stats", {
-        method: "GET",
-        headers: {
-            'content-type':'application/json;charset=utf-8'
-        },
-    })
-    .then(res => console.log(res))
-    .then(data => console.log(JSON.stringify(data)))
-
+ function getbookratingsdata() {
+    fetch('/api/books')
+    .then(data => data.json())
+    .then(books => {ratings(books)})
 }
 
+function ratings(books) {
+    const numbooks = []
+    for (let book, i = 0; book = books[i++];) {
+        numbooks.push(book.rating)
 
-
-const ctx = document.getElementById('myChart1');
-const myChart1 = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Rating 1', 'Rating 2', 'Rating 3', 'Rating 4', 'Rating 5'],
-        datasets: [{
-            label: '# of books',
-            data: [12, 19, 3, 5, 2],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)'
-        
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
-                
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: false
     }
-});
+    // console.log(numbooks)
+    const count = {};
 
-
-
-//toggle for collapsable menus
-function togglefunction(id) {
-    let smenu = document.getElementById(id);
-    if (smenu.className === "submenu") {
-        smenu.className = ('submenu hidden');
+    for (const element of numbooks) {
+    if (count[element]) {
+        count[element] += 1;
     } else {
-        smenu.className = "submenu";
+        count[element] = 1;
     }
+    }
+    
+    console.log(count)
+    const numbooksperrating = [count[1], count[2], count[3], count[4], count[5]]
+
+
+    const ctx = document.getElementById('myChart1');
+    const myChart1 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Rating 1', 'Rating 2', 'Rating 3', 'Rating 4', 'Rating 5'],
+            datasets: [{
+                label: '# of books',
+                data: numbooksperrating ,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+            
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                    
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+    
+    //toggle for collapsable menus
+    function togglefunction(id) {
+        let smenu = document.getElementById(id);
+        if (smenu.className === "submenu") {
+            smenu.className = ('submenu hidden');
+        } else {
+            smenu.className = "submenu";
+        }
+    }
+    
+
 }
+
+
+
 
 function installOtherEventHandlers() {
     // Events to open and close menus
@@ -67,6 +83,6 @@ function installOtherEventHandlers() {
 window.onload = () => {
 
     installOtherEventHandlers()
-    getbookratings()
+    getbookratingsdata()
 }
 

@@ -1,6 +1,6 @@
 import express from 'express'
 import './data'
-import { addOneBook, getAllBooks, getOneBook, getbookratings} from './data'
+import { addOneBook, getAllBooks, getOneBook} from './data'
 
 const app = express()
 const port = 8000
@@ -25,12 +25,12 @@ app.get('/api/books/:id', (req,res) => {
     })
 })
 
-// Getting ratings
-app.get('/api/books/stats', (req,res) => {
-    console.log('retrieving ratings data')
-    getbookratings( (data) => {res.send(JSON.stringify(data))})
+// // Getting ratings
+// app.get('/api/books/stats', (req,res) => {
+//     console.log('retrieving ratings data')
+//     getbookratings( (data) => {res.send(JSON.stringify(data))})
 
-})
+// })
 
 
 // Adding one book
