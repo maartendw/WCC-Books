@@ -8,6 +8,7 @@ export interface Book {
     image: string,
     rating: number,
     numberrating: number
+    category: string
 }
 
 export const books = [
@@ -20,6 +21,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/9251896-L.jpg",
         rating: 4,
         numberrating: 300,
+        category: "Romance"
     },
     {
         id: 2,
@@ -30,6 +32,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/11153217-L.jpg",
         rating: 5,
         numberrating: 255,
+        category: "Science Fiction"
     },
     {
         id: 3,
@@ -40,6 +43,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/10045188-L.jpg",
         rating: 5,
         numberrating: 120,
+        category: "Science Fiction"
     },
     {
         id: 4,
@@ -50,6 +54,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/911202-L.jpg",
         rating: 3,
         numberrating: 450,
+        category: "Science Fiction"
     },
     {
         id: 5,
@@ -60,6 +65,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/911202-L.jpg",
         rating: 4,
         numberrating: 450,
+        category: "Romance"
     },
     {
         id: 6,
@@ -70,6 +76,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/12597986-L.jpg",
         rating: 5,
         numberrating: 150,
+        category: "History"
     },
     {
         id: 7,
@@ -80,6 +87,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL32728761M-M.jpg",
         rating: 5,
         numberrating: 75,
+        category: "Romance"
     },
     {
         id: 8,
@@ -90,6 +98,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL21794948M-M.jpg",
         rating: 5,
         numberrating: 99,
+        category: "History"
     },
     {
         id: 9,
@@ -100,6 +109,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/10617761-L.jpg",
         rating: 3,
         numberrating: 34,
+        category: "Educational"
     },
     {
         id: 10,
@@ -110,6 +120,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/10397043-L.jpg",
         rating: 3,
         numberrating: 38,
+        category: "History"
     },
     {
         id: 11,
@@ -120,6 +131,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/10639721-L.jpg",
         rating: 4,
         numberrating: 67,
+        category: "Romance"
     },
     {
         id: 12,
@@ -130,6 +142,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/11464254-L.jpg",
         rating: 5,
         numberrating: 61,
+        category: "Science Fiction"
     },
     {
         id: 13,
@@ -140,6 +153,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL6531801M-M.jpg",
         rating: 4,
         numberrating: 33,
+        category: "Science Fiction"
     },
     {
         id: 14,
@@ -150,6 +164,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL7165004M-M.jpg",
         rating:1,
         numberrating: 10,
+        category: "Science Fiction"
     },
     {
         id: 15,
@@ -160,6 +175,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL13446609M-M.jpg",
         rating: 3,
         numberrating: 30,
+        category: "Science Fiction"
     },
     {
         id: 16,
@@ -170,6 +186,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL12569670M-M.jpg",
         rating: 4,
         numberrating: 10,
+        category: "Science Fiction"
     },
     {
         id: 17,
@@ -180,6 +197,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL13592573M-M.jpg",
         rating: 3,
         numberrating: 5,
+        category: "Romance"
     },
     {
         id: 18,
@@ -190,6 +208,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/362913-M.jpg",
         rating: 2,
         numberrating: 4,
+        category: "Romance"
     },
     {
         id: 19,
@@ -200,6 +219,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL28692298M-M.jpg",
         rating: 5,
         numberrating: 2,
+        category: "Science Fiction"
     },
     {
         id: 20,
@@ -210,6 +230,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL28692335M-M.jpg",
         rating: 4,
         numberrating: 20,
+        category: "Science Fiction"
     },
     {
         id: 21,
@@ -220,6 +241,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL28708064M-M.jpg",
         rating: 4,
         numberrating: 21,
+        category: "Science Fiction"
     },
     {
         id: 22,
@@ -230,6 +252,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/12513623-L.jpg",
         rating: 5,
         numberrating: 144,
+        category: "Romance"
     },
     {
         id: 23,
@@ -240,6 +263,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/11394793-L.jpg",
         rating: 5,
         numberrating: 67,
+        category: "Romance"
     },
     {
         id: 24,
@@ -250,6 +274,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/10749908-L.jpg",
         rating: 4,
         numberrating: 250,
+        category: "History"
     },
     {
         id: 25,
@@ -260,6 +285,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/10404829-L.jpg",
         rating: 4,
         numberrating: 112,
+        category: "Romance"
     },
     {
         id: 26,
@@ -270,6 +296,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/11153455-L.jpg",
         rating: 5,
         numberrating: 332,
+        category: "Romance"
     },
     {
         id: 27,
@@ -280,6 +307,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/119702-L.jpg",
         rating: 5,
         numberrating: 32,
+        category: "Romance"
     },
     {
         id: 28,
@@ -290,6 +318,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/id/9279209-L.jpg",
         rating: 5,
         numberrating: 201,
+        category: "Romance"
     },
     {
         id: 29,
@@ -300,6 +329,7 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL22890331M-M.jpg",
         rating: 4,
         numberrating: 33,
+        category: "History"
     },
     {
         id: 30,
@@ -310,5 +340,6 @@ export const books = [
         image: "https://covers.openlibrary.org/b/olid/OL23281904M-M.jpg",
         rating: 3,
         numberrating: 42,
+        category: "History"
     }
 ]
