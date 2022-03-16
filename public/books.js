@@ -54,6 +54,39 @@ function createBookBox(book) {
     return li
 }
 
+
+function countCategories(books){
+    let lookup = {};
+    const items = books;
+    let result = [];
+
+    for (let item, i = 0; item = items[i++];) {
+    let category = item.category;
+
+    if (!(category in lookup)) {
+        lookup[category] = 1;
+        result.push(category);}
+     else {
+        lookup[category] += 1
+    }
+}
+    const catsummary = document.getElementById("categorysummary")
+
+    Object.keys(lookup).forEach(function(key) {
+    console.log(key + ',' + lookup[key])
+    const a = document.createElement("a")
+    a.href = " "
+    const p = document.createElement("p")
+
+    a.innerText = key + ' (' + lookup[key] + ')'
+    p.append(a)
+    catsummary.append(p)
+
+    //TO DO: SIZE CHANGE FOR COUNTS!! CSS?
+
+  })    
+}
+
 function loadAndFillBooks(search) {
     let query = ""
     if( search != undefined )
@@ -61,21 +94,8 @@ function loadAndFillBooks(search) {
 
     fetch('/api/books'+query)
     .then(data => data.json())
-    .then(books => { fillBooks(books)})
+    .then(books => { fillBooks(books), countCategories(books)})
 }
-
-
-function addNewBook() {
-    fetch("/api/books", {
-        method: "POST",
-        headers: {
-            'content-type':'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({title:"Bla"})
-    })
-}
-
-
 
 function applySearch() {
     const input = document.getElementById("searchbar")
