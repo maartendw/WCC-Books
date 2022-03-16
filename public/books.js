@@ -1,12 +1,13 @@
 function fillBooks(books) {
-    console.log(books)
     const lista = document.getElementById("listofbooks")
     lista.innerHTML = ""
     for (const idx in books) {
         const li = createBookBox(books[idx])
         lista.append(li)
+        
     }
 }
+
 
 function createBookBox(book) {
     const li = document.createElement("LI")
@@ -60,7 +61,7 @@ function loadAndFillBooks(search) {
 
     fetch('/api/books'+query)
     .then(data => data.json())
-    .then(books => { fillBooks(books) })
+    .then(books => { fillBooks(books)})
 }
 
 
@@ -73,6 +74,8 @@ function addNewBook() {
         body: JSON.stringify({title:"Bla"})
     })
 }
+
+
 
 function applySearch() {
     const input = document.getElementById("searchbar")

@@ -46,13 +46,6 @@ CREATE TABLE author(
                     db.run(insert, [22,"Charles Dickens"])
 
 
-
-
-
-
-
-
-
                 }
             })
 db.run(
