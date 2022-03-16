@@ -3,7 +3,7 @@ import {books, Book} from '../books'
 
 export function getAllBooks(search:string, fn:(books:Book[]) => void) {
   const sql = `
-              SELECT b.id, b.title, b.image, b.rating, b.numberrating,
+              SELECT b.id, b.title, b.image, b.rating, b.numberrating, b.category,
               GROUP_CONCAT(a.name, ', ') as authors
               FROM Book b
               INNER JOIN author_book ab ON b.id = ab.book_id
@@ -25,7 +25,7 @@ export function getAllBooks(search:string, fn:(books:Book[]) => void) {
 
 export function getOneBook(id:number, fn:(book:Book|null) => void) {
   const sql = `
-            SELECT b.id, b.title, b.image, b.rating, b.numberrating,
+            SELECT b.id, b.title, b.image, b.rating, b.numberrating, b.category,
             GROUP_CONCAT(a.name, ', ') as authors
             FROM Book b
             INNER JOIN author_book ab ON b.id = ab.book_id
@@ -46,10 +46,10 @@ export function getOneBook(id:number, fn:(book:Book|null) => void) {
 
 export function addOneBook(s:Book) {
   const insertAuthor = 'INSERT INTO author (name) VALUES (?)' // autoincrement, so no id provided
-  const insertBook = 'INSERT INTO book (title, image, rating, numberrating) VALUES (?,?,?,?)' // autoincrement, so no id provided
+  const insertBook = 'INSERT INTO book (title, image, rating, numberrating, category) VALUES (?,?,?,?,?)' // autoincrement, so no id provided
   const insertRelation = 'INSERT INTO author_book (author_id, book_id) VALUES (?,?)'
 
-  db.run(insertBook, [s.title, s.image, s.rating, s.numberrating]) // add book in book table
+  db.run(insertBook, [s.title, s.image, s.rating, s.numberrating, s.category]) // add book in book table
   // here we have to find something to get the id of the just written book
 
   s.authors.forEach(author => {

@@ -29,7 +29,8 @@ window.onload = () => {
             authors: document.getElementById('newbookauthors').value.split(", "),
             image: document.getElementById('newbookimage').value,
             rating: document.getElementById('newbookrating').value,
-            numberrating:document.getElementById('newbooknumberrating').value
+            numberrating: document.getElementById('newbooknumberrating').value,
+            category: document.getElementById('newbookcategory').value
         }
 
         console.log(newbook)

@@ -62,7 +62,8 @@ CREATE TABLE book(
     title TEXT,
     image TEXT,
     rating INTEGER,
-    numberrating INTEGER
+    numberrating INTEGER,
+    category TEXT
 )
 `
 , (dberr) => { if(dberr) {
@@ -70,10 +71,10 @@ CREATE TABLE book(
                } else {
                     const insert =
 `
-INSERT INTO book (id,title, image, rating, numberrating) VALUES (?,?,?,?,?)
+INSERT INTO book (id, title, image, rating, numberrating, category) VALUES (?,?,?,?,?,?)
 `
                     books.forEach( b => {
-                        db.run(insert, [b.id, b.title, b.image, b.rating, b.numberrating])
+                        db.run(insert, [b.id, b.title, b.image, b.rating, b.numberrating, b.category])
                     })
                 }
             })
