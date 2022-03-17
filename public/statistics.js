@@ -4,6 +4,41 @@
     .then(books => {ratings(books)})
 }
 
+
+function countCategories(books){
+    let lookup = {};
+    const items = books;
+    let result = [];
+
+    for (let item, i = 0; item = items[i++];) {
+    let category = item.category;
+
+    if (!(category in lookup)) {
+        lookup[category] = 1;
+        result.push(category);}
+     else {
+        lookup[category] += 1
+    }
+}
+    const catsummary = document.getElementById("categorysummary")
+
+    Object.keys(lookup).forEach(function(key) {
+    console.log(key + ',' + lookup[key])
+    const li = document.createElement("li")
+    li.innerText = key + ' (' + lookup[key] + ')'
+    catsummary.append(li)
+
+
+  })    
+}
+
+
+function FillBooksCategories() {
+    fetch('/api/books')
+    .then(data => data.json())
+    .then(books => {countCategories(books)})
+}
+
 function ratings(books) {
     const numbooks = []
     for (let book, i = 0; book = books[i++];) {
@@ -81,7 +116,7 @@ function installOtherEventHandlers() {
 }
 
 window.onload = () => {
-
+    FillBooksCategories()
     installOtherEventHandlers()
     getbookratingsdata()
 }
