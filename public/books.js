@@ -50,6 +50,31 @@ function createBookBox(book) {
     const rating_num = document.createElement("span")
     rating_num.innerHTML = (' (' + book.numberrating +')<br>')
     div.append(rating_num)
+
+    
+    //div and text for addremove wishlist
+    const wishlistdiv = document.createElement('div')
+    li.append(wishlistdiv)
+    const addremove = document.createElement('em')
+    addremove.innerHTML = "<br>Wish list:&nbsp;&nbsp;&nbsp;"
+    wishlistdiv.append(addremove)
+    
+    //Add and remove buttons
+    const add = document.createElement("button")
+    wishlistdiv.append(add)
+    add.innerText = 'Add'
+    add.setAttribute("class", "addremovebook")
+    add.addEventListener('click', () => {
+        bookbox_addItem(title.innerText)
+    });
+
+    const remove = document.createElement("button")
+    remove.innerText = 'Remove'
+    remove.setAttribute("id", "addremovebook")
+    remove.addEventListener('click', () => {
+        bookbox_removeItem(title.innerText)
+    });
+    wishlistdiv.append(remove)
     
     return li
 }
@@ -74,15 +99,10 @@ function countCategories(books){
 
     Object.keys(lookup).forEach(function(key) {
     console.log(key + ',' + lookup[key])
-    const a = document.createElement("a")
-    a.href = " "
-    const p = document.createElement("p")
+    const li = document.createElement("li")
+    li.innerText = key + ' (' + lookup[key] + ')'
+    catsummary.append(li)
 
-    a.innerText = key + ' (' + lookup[key] + ')'
-    p.append(a)
-    catsummary.append(p)
-
-    //TO DO: SIZE CHANGE FOR COUNTS!! CSS?
 
   })    
 }
@@ -94,7 +114,13 @@ function loadAndFillBooks(search) {
 
     fetch('/api/books'+query)
     .then(data => data.json())
-    .then(books => { fillBooks(books), countCategories(books)})
+    .then(books => {fillBooks(books)})
+}
+
+function FillBooksCategories() {
+    fetch('/api/books')
+    .then(data => data.json())
+    .then(books => {countCategories(books)})
 }
 
 function applySearch() {
@@ -103,6 +129,53 @@ function applySearch() {
     const text = input.value
     loadAndFillBooks(text)
 }
+
+//function for searching books
+function searchFunction() {
+    let bookboxes = document.querySelectorAll('.bookbox');
+    let booktitle = document.querySelectorAll('.title')
+    let userinput = document.getElementById('searchbar').value;
+    userinput = userinput.toLowerCase();
+    for (let i = 0; i < bookboxes.length; i++) {
+        if (booktitle[i].innerText.toLowerCase().includes(userinput)) {
+            bookboxes[i].className = ("bookbox");
+        } else {
+            bookboxes[i].className = ("bookbox hidden");
+        }
+    }
+
+}
+
+
+//function for adding books from wishlist input
+function addItem() {
+    let wishlist = document.getElementById("wishlist_books");
+    let book = document.getElementById("bookinput").value;
+    const li = document.createElement("li");
+    li.setAttribute("id", book.toLowerCase())
+    if (!wishlist.innerText.toLowerCase().includes(book.toLowerCase())) {
+        li.append(book);
+        wishlist.appendChild(li);
+    }
+}
+
+//function for adding books from bookbox
+function bookbox_addItem(title) {
+    let wishlist = document.getElementById("wishlist_books");
+    const li = document.createElement("li");
+    li.setAttribute("id", title.toLowerCase())
+    if (!wishlist.innerText.toLowerCase().includes(title.toLowerCase())) {
+        li.innerText = title;
+    wishlist.appendChild(li)
+    }
+}
+
+  //function for removing books from bookbox
+function bookbox_removeItem(title) {
+    let wishlist = document.getElementById("wishlist_books");
+    let li = document.getElementById(title.toLowerCase())
+    wishlist.removeChild(li)
+  }
 
 function installOtherEventHandlers() {
     // Events to open and close menus
@@ -114,6 +187,7 @@ function installOtherEventHandlers() {
 
 window.onload = () => {
     loadAndFillBooks() // If no parameter is given, search is undefined
+    FillBooksCategories()
 
     installOtherEventHandlers()
 }
