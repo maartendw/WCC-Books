@@ -44,22 +44,24 @@
     <SECTION>
         <h1>Add Book Page</h1>
         <form class='addbookform' id="addbook">
-            <label for="newbooktitle">Title:</label><br>
-            <input type="text" id="newbooktitle" name="newbooktitle"><br>
-            <label for="newbookcategory">Category:</label><br>
-            <input type="text" list="category_options" id="newbookcategory" name="newbookcategory"/><br>
+            <label for="newbooktitle">Title</label><br>
+            <input type="text" id="newbooktitle" name="newbooktitle"><br><br>
+            <label for="newbookcategory">Category</label><br>
+            <input type="text" list="category_options" id="newbookcategory" name="newbookcategory"/>
+            <p>Choose a category known in the database or specify a new one.</p>
             <datalist id="category_options">
             </datalist>
 
 
-            <label for="newbookimage">Image Link:</label><br>
-            <input type="text" id="newbookimage" name="image"><br>
-            <label for="newbookrating">Rating:</label><br>
-            <input type="number" id="newbookrating" name="newbookrating"><br>
-            <label for="newbooknumberrating">Number of ratings:</label><br>
-            <input type="number" id="newbooknumberrating" name="newbooknumberrating"><br>
-            <label for="newbookauthors">Authors:</label><br>
-            <input type="text" id="newbookauthors" name="newbookauthors"><br>
+            <label for="newbookimage">Image Link</label><br>
+            <input type="text" id="newbookimage" name="image"><br><br>
+            <label for="newbookrating">Rating</label><br>
+            <input type="number" id="newbookrating" name="newbookrating"><br><br>
+            <label for="newbooknumberrating">Number of ratings</label><br>
+            <input type="number" id="newbooknumberrating" name="newbooknumberrating"><br><br>
+            <label for="newbookauthors">Authors</label><br>
+            <input type="text" id="newbookauthors" name="newbookauthors">
+            <p>Split authors by using ','</p>
             <button type="submit">Submit</button>
         </form>              
         
