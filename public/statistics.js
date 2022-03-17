@@ -4,6 +4,18 @@
     .then(books => {ratings(books)})
 }
 
+function getbookcategorydata() {
+    fetch('/api/books')
+    .then(data => data.json())
+    .then(books => {categorydata(books)})
+}
+
+function FillBooksCategories() {
+    fetch('/api/books')
+    .then(data => data.json())
+    .then(books => {countCategories(books)})
+}
+
 
 function countCategories(books){
     let lookup = {};
@@ -18,26 +30,22 @@ function countCategories(books){
         result.push(category);}
      else {
         lookup[category] += 1
+
     }
 }
     const catsummary = document.getElementById("categorysummary")
 
     Object.keys(lookup).forEach(function(key) {
-    console.log(key + ',' + lookup[key])
     const li = document.createElement("li")
     li.innerText = key + ' (' + lookup[key] + ')'
     catsummary.append(li)
-
+    
 
   })    
 }
 
 
-function FillBooksCategories() {
-    fetch('/api/books')
-    .then(data => data.json())
-    .then(books => {countCategories(books)})
-}
+
 
 function ratings(books) {
     const numbooks = []
@@ -56,7 +64,6 @@ function ratings(books) {
     }
     }
     
-    console.log(count)
     const numbooksperrating = [count[1], count[2], count[3], count[4], count[5]]
 
 
@@ -66,7 +73,7 @@ function ratings(books) {
         data: {
             labels: ['Rating 1', 'Rating 2', 'Rating 3', 'Rating 4', 'Rating 5'],
             datasets: [{
-                label: '# of books',
+                label: '# of books per rating',
                 data: numbooksperrating ,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -105,8 +112,56 @@ function ratings(books) {
 
 }
 
+function categorydata(books) {
+    const numbookspercategory = []
+    for (let b, i = 0; b = books[i++];) {
+        numbookspercategory.push(b.category)
 
+    }
+    const countcats = {};
 
+    for (const cat of numbookspercategory) {
+    if (countcats[cat]) {
+        countcats[cat] += 1;
+
+    } else {
+        countcats[cat] = 1;
+    }
+    }
+    
+
+    const ctx = document.getElementById('myChart2');
+    const myChart2 = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(countcats),
+            datasets: [{
+                label: '# of books per category',
+                data: Object.values(countcats),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+            
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                    
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+}
 
 function installOtherEventHandlers() {
     // Events to open and close menus
@@ -119,5 +174,6 @@ window.onload = () => {
     FillBooksCategories()
     installOtherEventHandlers()
     getbookratingsdata()
+    getbookcategorydata()
 }
 
