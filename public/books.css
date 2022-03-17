@@ -84,6 +84,17 @@ NAV A {
     text-decoration: none;
 }
 
+label {
+    font-weight: bold;
+    line-height: 22px;
+}
+
+form{
+    padding-left: 20;
+    line-height: 15px;
+
+}
+
 @media screen and (min-width:700px) {
     #menuicon {
         display:none;
