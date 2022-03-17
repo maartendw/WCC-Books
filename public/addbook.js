@@ -100,6 +100,7 @@ window.onload = () => {
 
         console.log(newbook)
         addNewBook(newbook)
+        myform.reset()
         
 })
 
