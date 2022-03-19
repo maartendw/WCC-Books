@@ -5,7 +5,9 @@ function addNewBook(item) {
             'content-type':'application/json;charset=utf-8'
         },
         body: JSON.stringify(item)
+        
     })
+    console.log(item)
 }
 
 function FillBooksCategories() {

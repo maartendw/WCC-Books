@@ -62,7 +62,7 @@ export const books = [
         authors: [
             "Frank Herbert"
         ],
-        image: "https://covers.openlibrary.org/b/id/911202-L.jpg",
+        image: "https://covers.openlibrary.org/b/isbn/0399128964-L.jpg",
         rating: 4,
         numberrating: 450,
         category: "Romance"

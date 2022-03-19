@@ -64,29 +64,33 @@ export function addOneBook(s:Book) {
                      ORDER BY id DESC LIMIT 1`
 
     // Check if author already exits
+
+
+
     db.get(sqlAuthor, paramsAuthor, (err, row) => {
-      const authorID = JSON.stringify(row)
 
       if (row === undefined) {  // If author does not exist:
+        db.serialize(() => {
 
         console.log(author + ' does not exist in db')
         // Insert author into author table (ID is inserted automatically via autoincrement)
-        db.run(insertAuthor, author)
+        db.run(insertAuthor, [author])
         console.log(author + ' now added in db')
         // Fetch ID auf newly inserted author
         db.get(sqlAuthor, paramsAuthor, (err3, row3) => {
+          console.log('This is row3 output' + row3)
           const authorIDnew = JSON.stringify(row3.id)
-          console.log(author + 's ID is now: ' + authorIDnew)
+          // console.log(author + 's ID is now: ' + authorIDnew)
         // Fetch ID of newly created Book
           db.get(sqlBook,(err2, row2) => {
             const bookIDnew = JSON.stringify(row2.id)
           // Insert author / book relation with the corresponding IDs
-            db.run(insertRelation, authorIDnew, bookIDnew)
+            db.run(insertRelation, [authorIDnew, bookIDnew])
           } )
 
         })
 
-    } else { // else if author already exists
+    })} else { // else if author already exists
 
       const authorIDold = JSON.stringify(row.id)
       console.log(author + ' - author already in database with ID - ' + authorIDold)
