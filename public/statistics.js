@@ -76,22 +76,13 @@ function ratings(books) {
                 label: '# of books per rating',
                 data: numbooksperrating ,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)'
+                    'rgba(240,128,128,0.2)',
+                    'rgba(255,127,80, 0.4)',
+                    'rgba(255,99,71, 0.6)',
+                    'rgba(255,0,0, 0.8)',
+                    'rgba(139,0,0, 1)'
             
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                    
-                ],
-                borderWidth: 1
+                ]
             }]
         },
         options: {
@@ -139,22 +130,18 @@ function categorydata(books) {
                 label: '# of books per category',
                 data: Object.values(countcats),
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)'
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(60, 179, 113, 0.5)',
+                    'rgba(180, 180, 180, 0.5)'
+
+                
+                ]
             
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                    
-                ],
-                borderWidth: 1
             }]
         },
         options: {
