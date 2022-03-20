@@ -1,4 +1,4 @@
- function getbookratingsdata() {
+function getbookratingsdata() {
     fetch('/api/books')
     .then(data => data.json())
     .then(books => {ratings(books)})
@@ -48,24 +48,21 @@ function countCategories(books){
 
 
 function ratings(books) {
-    const numbooks = []
-    for (let book, i = 0; book = books[i++];) {
-        numbooks.push(book.rating)
 
-    }
-    // console.log(numbooks)
-    const count = {};
-
-    for (const element of numbooks) {
-    if (count[element]) {
-        count[element] += 1;
+    const ratings = []
+    books.forEach( book => {
+        ratings.push(book.rating)
+    })
+    
+    const ratingcount = {};
+    for (const i of ratings) {
+    if (ratingcount[i]) {
+        ratingcount[i] += 1;
     } else {
-        count[element] = 1;
+        ratingcount[i] = 1;
     }
     }
     
-    const numbooksperrating = [count[1], count[2], count[3], count[4], count[5]]
-
 
     const ctx = document.getElementById('myChart1');
     const myChart1 = new Chart(ctx, {
@@ -74,7 +71,7 @@ function ratings(books) {
             labels: ['Rating 1', 'Rating 2', 'Rating 3', 'Rating 4', 'Rating 5'],
             datasets: [{
                 label: '# of books per rating',
-                data: numbooksperrating ,
+                data: Object.values(ratingcount),
                 backgroundColor: [
                     'rgba(240,128,128,0.2)',
                     'rgba(255,127,80, 0.4)',
@@ -104,19 +101,19 @@ function ratings(books) {
 }
 
 function categorydata(books) {
-    const numbookspercategory = []
-    for (let b, i = 0; b = books[i++];) {
-        numbookspercategory.push(b.category)
-
-    }
+ 
+    const categories = []
+    books.forEach( book => {
+        categories.push(book.category)
+    })
+    
     const countcats = {};
-
-    for (const cat of numbookspercategory) {
-    if (countcats[cat]) {
-        countcats[cat] += 1;
+    for (const category of categories) {
+    if (countcats[category]) {
+        countcats[category] += 1;
 
     } else {
-        countcats[cat] = 1;
+        countcats[category] = 1;
     }
     }
     
@@ -138,8 +135,6 @@ function categorydata(books) {
                     'rgba(255, 159, 64, 0.5)',
                     'rgba(60, 179, 113, 0.5)',
                     'rgba(180, 180, 180, 0.5)'
-
-                
                 ]
             
             }]
