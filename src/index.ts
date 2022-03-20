@@ -25,14 +25,6 @@ app.get('/api/books/:id', (req,res) => {
     })
 })
 
-// // Getting ratings
-// app.get('/api/books/stats', (req,res) => {
-//     console.log('retrieving ratings data')
-//     getbookratings( (data) => {res.send(JSON.stringify(data))})
-
-// })
-
-
 // Adding one book
 app.post('/api/books', (req,res) => {
     console.log('New Books Being added')

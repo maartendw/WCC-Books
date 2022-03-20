@@ -30,7 +30,6 @@ function countCategories(books){
         result.push(category);}
      else {
         lookup[category] += 1
-
     }
 }
     const catsummary = document.getElementById("categorysummary")
@@ -39,12 +38,8 @@ function countCategories(books){
     const li = document.createElement("li")
     li.innerText = key + ' (' + lookup[key] + ')'
     catsummary.append(li)
-    
-
   })    
 }
-
-
 
 
 function ratings(books) {
@@ -63,7 +58,6 @@ function ratings(books) {
     }
     }
     
-
     const ctx = document.getElementById('myChart1');
     const myChart1 = new Chart(ctx, {
         type: 'bar',
@@ -86,7 +80,8 @@ function ratings(books) {
             responsive: false
         }
     });
-    
+
+
     //toggle for collapsable menus
     function togglefunction(id) {
         let smenu = document.getElementById(id);
@@ -96,7 +91,6 @@ function ratings(books) {
             smenu.className = "submenu";
         }
     }
-    
 
 }
 

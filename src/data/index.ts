@@ -50,7 +50,6 @@ export function addOneBook(s:Book) {
   const insertRelation = 'INSERT INTO author_book (author_id, book_id) VALUES (?,?)'
 
   db.run(insertBook, [s.title, s.image, s.rating, s.numberrating, s.category]) // add book in book table
-  // here we have to find something to get the id of the just written book
 
   s.authors.forEach(author => {
     const sqlAuthor = `SELECT id
@@ -106,24 +105,3 @@ export function addOneBook(s:Book) {
   })
 
   })}
-
-
-// export function getbookratings(fn:(entries:[]) => void) {
-
-//   const sqlbookratings = `SELECT COUNT(id) as count, rating
-//                        FROM book
-//                        GROUP BY rating;`
-
-//   return db.get(sqlbookratings,(err, rows) => {
-//     console.log('getbookratings function activated')
-//     if (err) {
-//       console.log('error connecting to database')
-//       fn([])
-//     } else {
-
-//       // console.log(rows)
-//       fn(rows)
-//     }
-
-//   })
-// }

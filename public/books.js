@@ -8,7 +8,6 @@ function fillBooks(books) {
     }
 }
 
-
 function createBookBox(book) {
     const li = document.createElement("LI")
     li.setAttribute('class', 'bookbox')
@@ -33,7 +32,6 @@ function createBookBox(book) {
     author.innerText = book.authors // THIS DOES NOT WORK? ARRAY ITERATOR?
     div.append(author)
 
-    // console.log(book.authors)
     
     //ratings:
     const yellowstar = document.createElement("span")
