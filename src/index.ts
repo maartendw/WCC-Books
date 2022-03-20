@@ -25,14 +25,6 @@ app.get('/api/books/:id', (req,res) => {
     })
 })
 
-// // Getting ratings
-// app.get('/api/books/stats', (req,res) => {
-//     console.log('retrieving ratings data')
-//     getbookratings( (data) => {res.send(JSON.stringify(data))})
-
-// })
-
-
 // Adding one book
 app.post('/api/books', (req,res) => {
     console.log('New Books Being added')
@@ -46,7 +38,6 @@ app.post('/api/books', (req,res) => {
 
 })
 
-// Add 400 if not succesful, or not all fiedls filled
 
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );

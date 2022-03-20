@@ -8,7 +8,6 @@ function fillBooks(books) {
     }
 }
 
-
 function createBookBox(book) {
     const li = document.createElement("LI")
     li.setAttribute('class', 'bookbox')
@@ -30,10 +29,9 @@ function createBookBox(book) {
     
     //author:
     const author = document.createElement("h3")
-    author.innerText = book.authors // THIS DOES NOT WORK? ARRAY ITERATOR?
+    author.innerText = book.authors 
     div.append(author)
 
-    // console.log(book.authors)
     
     //ratings:
     const yellowstar = document.createElement("span")
@@ -98,7 +96,6 @@ function countCategories(books){
     const catsummary = document.getElementById("categorysummary")
 
     Object.keys(lookup).forEach(function(key) {
-    console.log(key + ',' + lookup[key])
     const li = document.createElement("li")
     li.innerText = key + ' (' + lookup[key] + ')'
     catsummary.append(li)
@@ -125,7 +122,6 @@ function FillBooksCategories() {
 
 function applySearch() {
     const input = document.getElementById("searchbar")
-    console.log(input)
     const text = input.value
     loadAndFillBooks(text)
 }
@@ -177,19 +173,9 @@ function bookbox_removeItem(title) {
     wishlist.removeChild(li)
   }
 
-function installOtherEventHandlers() {
-    // Events to open and close menus
-    // ...
-
-    // Events to call loadAndFillBooks with a new search value
-    document.getElementById("searchbutton").onclick = applySearch
-}
-
 window.onload = () => {
     loadAndFillBooks() // If no parameter is given, search is undefined
     FillBooksCategories()
-
-    installOtherEventHandlers()
 }
 
 

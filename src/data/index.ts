@@ -17,7 +17,6 @@ export function getAllBooks(search:string, fn:(books:Book[]) => void) {
       console.log("error in database: "+err)
       fn([])
     } else {
-      console.log(rows)
       fn(rows)
     }
   })
@@ -38,7 +37,6 @@ export function getOneBook(id:number, fn:(book:Book|null) => void) {
       console.log("error in database: "+err)
       fn(null)
     } else {
-      console.log(row)
       fn(row)
     }
   })
@@ -50,7 +48,6 @@ export function addOneBook(s:Book) {
   const insertRelation = 'INSERT INTO author_book (author_id, book_id) VALUES (?,?)'
 
   db.run(insertBook, [s.title, s.image, s.rating, s.numberrating, s.category]) // add book in book table
-  // here we have to find something to get the id of the just written book
 
   s.authors.forEach(author => {
     const sqlAuthor = `SELECT id
@@ -65,8 +62,6 @@ export function addOneBook(s:Book) {
 
     // Check if author already exits
 
-
-
     db.get(sqlAuthor, paramsAuthor, (err, row) => {
 
       if (row === undefined) {  // If author does not exist:
@@ -78,9 +73,8 @@ export function addOneBook(s:Book) {
         console.log(author + ' now added in db')
         // Fetch ID auf newly inserted author
         db.get(sqlAuthor, paramsAuthor, (err3, row3) => {
-          console.log('This is row3 output' + row3)
           const authorIDnew = JSON.stringify(row3.id)
-          // console.log(author + 's ID is now: ' + authorIDnew)
+          console.log(author + 's ID is now: ' + authorIDnew)
         // Fetch ID of newly created Book
           db.get(sqlBook,(err2, row2) => {
             const bookIDnew = JSON.stringify(row2.id)
@@ -106,24 +100,3 @@ export function addOneBook(s:Book) {
   })
 
   })}
-
-
-// export function getbookratings(fn:(entries:[]) => void) {
-
-//   const sqlbookratings = `SELECT COUNT(id) as count, rating
-//                        FROM book
-//                        GROUP BY rating;`
-
-//   return db.get(sqlbookratings,(err, rows) => {
-//     console.log('getbookratings function activated')
-//     if (err) {
-//       console.log('error connecting to database')
-//       fn([])
-//     } else {
-
-//       // console.log(rows)
-//       fn(rows)
-//     }
-
-//   })
-// }
