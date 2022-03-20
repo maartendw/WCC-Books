@@ -1,112 +1,34 @@
-function getbookratingsdata() {
-    fetch('/api/books')
+
+function getcategoriesdata() {
+    fetch('/api/categories')
     .then(data => data.json())
-    .then(books => {ratings(books), categorydata(books), countCategories(books)})
+    .then(categories => {categoriesscount(categories), countCategories(categories)})
+
 }
 
-function countCategories(books){
-    let lookup = {};
-    const items = books;
-    let result = [];
-
-    for (let item, i = 0; item = items[i++];) {
-    let category = item.category;
-
-    if (!(category in lookup)) {
-        lookup[category] = 1;
-        result.push(category);}
-     else {
-        lookup[category] += 1
-    }
-}
-    const catsummary = document.getElementById("categorysummary")
-
-    Object.keys(lookup).forEach(function(key) {
-    const li = document.createElement("li")
-    li.innerText = key + ' (' + lookup[key] + ')'
-    catsummary.append(li)
-  })    
+function getratingsdata() {
+    fetch('/api/ratings')
+    .then(data => data.json())
+    .then(ratings => {ratingscount(ratings)})
 }
 
-
-function ratings(books) {
-
-    const ratings = []
-    books.forEach( book => {
-        ratings.push(book.rating)
+function categoriesscount(categories) {
+    
+    const categorieslabels = []
+    const categoriesdata = []
+    categories.forEach( category => {
+        categoriesdata.push(category.count)
+        categorieslabels.push(category.category)
     })
-    
-    const ratingcount = {};
-    for (const i of ratings) {
-    if (ratingcount[i]) {
-        ratingcount[i] += 1;
-    } else {
-        ratingcount[i] = 1;
-    }
-    }
-    
-    const ctx = document.getElementById('myChart1');
-    const myChart1 = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Rating 1', 'Rating 2', 'Rating 3', 'Rating 4', 'Rating 5'],
-            datasets: [{
-                label: '# of books per rating',
-                data: Object.values(ratingcount),
-                backgroundColor: [
-                    'rgba(240,128,128,0.2)',
-                    'rgba(255,127,80, 0.4)',
-                    'rgba(255,99,71, 0.6)',
-                    'rgba(255,0,0, 0.8)',
-                    'rgba(139,0,0, 1)'
-            
-                ]
-            }]
-        },
-        options: {
-            responsive: false
-        }
-    });
-
-
-    //toggle for collapsable menus
-    function togglefunction(id) {
-        let smenu = document.getElementById(id);
-        if (smenu.className === "submenu") {
-            smenu.className = ('submenu hidden');
-        } else {
-            smenu.className = "submenu";
-        }
-    }
-
-}
-
-function categorydata(books) {
- 
-    const categories = []
-    books.forEach( book => {
-        categories.push(book.category)
-    })
-    
-    const countcats = {};
-    for (const category of categories) {
-    if (countcats[category]) {
-        countcats[category] += 1;
-
-    } else {
-        countcats[category] = 1;
-    }
-    }
-    
 
     const ctx = document.getElementById('myChart2');
     const myChart2 = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: Object.keys(countcats),
+            labels: categorieslabels,
             datasets: [{
                 label: '# of books per category',
-                data: Object.values(countcats),
+                data: categoriesdata,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',
@@ -124,9 +46,67 @@ function categorydata(books) {
             responsive: false
         }
     });
+
 }
 
+function countCategories(categories){
+
+    const catsummary = document.getElementById("categorysummary")
+
+    categories.forEach( category => {
+        const li = document.createElement("li")
+        li.innerText = category.category + ' (' + category.count + ')'
+        catsummary.append(li)})
+
+}
+
+
+function ratingscount(ratings) {
+    const ratingsdata = []
+    ratings.forEach( rating => {
+        ratingsdata.push(rating.count)
+    })
+
+    const ctx = document.getElementById('myChart1');
+    const myChart1 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Rating 1', 'Rating 2', 'Rating 3', 'Rating 4', 'Rating 5'],
+            datasets: [{
+                label: '# of books per rating',
+                data: ratingsdata,
+                backgroundColor: [
+                    'rgba(240,128,128,0.2)',
+                    'rgba(255,127,80, 0.4)',
+                    'rgba(255,99,71, 0.6)',
+                    'rgba(255,0,0, 0.8)',
+                    'rgba(139,0,0, 1)'
+            
+                ]
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+}
+
+
+
+//toggle for collapsable menus
+function togglefunction(id) {
+    let smenu = document.getElementById(id);
+    if (smenu.className === "submenu") {
+        smenu.className = ('submenu hidden');
+    } else {
+        smenu.className = "submenu";
+    }
+}
+
+
+
 window.onload = () => {
-    getbookratingsdata()
+    getratingsdata()
+    getcategoriesdata()
 }
 

@@ -78,31 +78,6 @@ function createBookBox(book) {
 }
 
 
-function countCategories(books){
-    let lookup = {};
-    const items = books;
-    let result = [];
-
-    for (let item, i = 0; item = items[i++];) {
-    let category = item.category;
-
-    if (!(category in lookup)) {
-        lookup[category] = 1;
-        result.push(category);}
-     else {
-        lookup[category] += 1
-    }
-}
-    const catsummary = document.getElementById("categorysummary")
-
-    Object.keys(lookup).forEach(function(key) {
-    const li = document.createElement("li")
-    li.innerText = key + ' (' + lookup[key] + ')'
-    catsummary.append(li)
-
-
-  })    
-}
 
 function loadAndFillBooks(search) {
     let query = ""
@@ -114,11 +89,24 @@ function loadAndFillBooks(search) {
     .then(books => {fillBooks(books)})
 }
 
-function FillBooksCategories() {
-    fetch('/api/books')
+
+function getcategoriesdata() {
+    fetch('/api/categories')
     .then(data => data.json())
-    .then(books => {countCategories(books)})
+    .then(categories => {countCategories(categories)})
+
 }
+
+function countCategories(categories){
+    const catsummary = document.getElementById("categorysummary")
+
+    categories.forEach( category => {
+        const li = document.createElement("li")
+        li.innerText = category.category + ' (' + category.count + ')'
+        catsummary.append(li)})
+
+}
+
 
 function applySearch() {
     const input = document.getElementById("searchbar")
@@ -175,7 +163,7 @@ function bookbox_removeItem(title) {
 
 window.onload = () => {
     loadAndFillBooks() // If no parameter is given, search is undefined
-    FillBooksCategories()
+    getcategoriesdata()
 }
 
 

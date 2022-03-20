@@ -9,73 +9,38 @@ function addNewBook(item) {
     })
 }
 
-function FillBooksCategories() {
-    fetch('/api/books')
+function getcategoriesdata() {
+    fetch('/api/categories')
     .then(data => data.json())
-    .then(books => {countCategories(books)})
+    .then(categories => {getCategories(categories), countCategories(categories)})
+
 }
 
-function getCategories(books){
-
-    let lookup = {};
-    const items = books;
-    let result = [];
-
-    for (let item, i = 0; item = items[i++];) {
-    let category = item.category;
-
-    if (!(category in lookup)) {
-        lookup[category] = 1;
-        result.push(category);
-    }
-    }
+function getCategories(categories){
     
     const optionlist = document.getElementById("category_options")
 
-    result.forEach(category => {
+    categories.forEach( category => {
         const option = document.createElement("option")
-        option.innerText = category
-        optionlist.append(option)
-    })
-}
+        option.innerText = category.category
+        optionlist.append(option)})
 
-function FillCategories() {
-    fetch('/api/books')
-    .then(data => data.json())
-    .then(books => {getCategories(books)})
 }
 
 
-function countCategories(books){
-    let lookup = {};
-    const items = books;
-    let result = [];
-
-    for (let item, i = 0; item = items[i++];) {
-    let category = item.category;
-
-    if (!(category in lookup)) {
-        lookup[category] = 1;
-        result.push(category);}
-     else {
-        lookup[category] += 1
-    }
-}
+function countCategories(categories){
     const catsummary = document.getElementById("categorysummary")
 
-    Object.keys(lookup).forEach(function(key) {
-    const li = document.createElement("li")
-    li.innerText = key + ' (' + lookup[key] + ')'
-    catsummary.append(li)
+    categories.forEach( category => {
+        const li = document.createElement("li")
+        li.innerText = category.category + ' (' + category.count + ')'
+        catsummary.append(li)})
 
-
-  })    
 }
 
 
 window.onload = () => {
-    FillCategories()
-    FillBooksCategories()
+    getcategoriesdata()
     const myform = document.getElementById('addbook')
     myform.addEventListener("submit", function(event){
         event.preventDefault();

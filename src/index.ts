@@ -1,6 +1,6 @@
 import express from 'express'
 import './data'
-import { addOneBook, getAllBooks, getOneBook} from './data'
+import { addOneBook, getAllBooks, getOneBook, getRatings, getCategories} from './data'
 
 const app = express()
 const port = 8000
@@ -11,6 +11,16 @@ app.use(express.static('public'))
 app.get('/api/books', (req,res) => {
     const search:string = ( req.query.search || "" ) as string
     getAllBooks(search, (data) => { res.send(JSON.stringify(data)) })
+})
+
+// get ratings
+app.get('/api/ratings/', (req, res) => {
+    getRatings((data) => {res.send(JSON.stringify(data))})
+})
+
+// get categories
+app.get('/api/categories/', (req, res) => {
+    getCategories((data) => {res.send(JSON.stringify(data))})
 })
 
 // Getting one book

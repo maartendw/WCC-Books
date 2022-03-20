@@ -22,6 +22,32 @@ export function getAllBooks(search:string, fn:(books:Book[]) => void) {
   })
 }
 
+export function getRatings(fn:(ratings:any[]) => void) {
+  const sqlRatingsCount = `SELECT rating, COUNT(id) as count
+                     FROM book
+                     GROUP BY rating`
+
+  db.all(sqlRatingsCount, (error, rows) => {
+
+    console.log(rows)
+    fn(rows)
+
+  })
+}
+
+export function getCategories(fn:(categories:any[]) => void) {
+  const sqlRatingsCount = `SELECT category, COUNT(id) as count
+                           FROM book
+                           GROUP BY category`
+
+  db.all(sqlRatingsCount, (error, rows) => {
+
+    console.log(rows)
+    fn(rows)
+
+  })
+}
+
 export function getOneBook(id:number, fn:(book:Book|null) => void) {
   const sql = `
             SELECT b.id, b.title, b.image, b.rating, b.numberrating, b.category,
