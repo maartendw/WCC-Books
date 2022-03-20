@@ -1,21 +1,8 @@
 function getbookratingsdata() {
     fetch('/api/books')
     .then(data => data.json())
-    .then(books => {ratings(books), categorydata(books)})
+    .then(books => {ratings(books), categorydata(books), countCategories(books)})
 }
-
-// function getbookcategorydata() {
-//     fetch('/api/books')
-//     .then(data => data.json())
-//     .then(books => {categorydata(books)})
-// }
-
-function FillBooksCategories() {
-    fetch('/api/books')
-    .then(data => data.json())
-    .then(books => {countCategories(books)})
-}
-
 
 function countCategories(books){
     let lookup = {};
@@ -139,10 +126,7 @@ function categorydata(books) {
     });
 }
 
-
 window.onload = () => {
-    FillBooksCategories()
     getbookratingsdata()
-    getbookcategorydata()
 }
 
