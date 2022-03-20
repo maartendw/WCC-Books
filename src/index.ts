@@ -38,7 +38,6 @@ app.post('/api/books', (req,res) => {
 
 })
 
-// Add 400 if not succesful, or not all fiedls filled
 
 app.listen( port, () => {
     console.log( `server started at http://localhost:${ port }` );

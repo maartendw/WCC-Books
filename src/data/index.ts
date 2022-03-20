@@ -17,7 +17,6 @@ export function getAllBooks(search:string, fn:(books:Book[]) => void) {
       console.log("error in database: "+err)
       fn([])
     } else {
-      console.log(rows)
       fn(rows)
     }
   })
@@ -38,7 +37,6 @@ export function getOneBook(id:number, fn:(book:Book|null) => void) {
       console.log("error in database: "+err)
       fn(null)
     } else {
-      console.log(row)
       fn(row)
     }
   })
@@ -64,8 +62,6 @@ export function addOneBook(s:Book) {
 
     // Check if author already exits
 
-
-
     db.get(sqlAuthor, paramsAuthor, (err, row) => {
 
       if (row === undefined) {  // If author does not exist:
@@ -77,9 +73,8 @@ export function addOneBook(s:Book) {
         console.log(author + ' now added in db')
         // Fetch ID auf newly inserted author
         db.get(sqlAuthor, paramsAuthor, (err3, row3) => {
-          console.log('This is row3 output' + row3)
           const authorIDnew = JSON.stringify(row3.id)
-          // console.log(author + 's ID is now: ' + authorIDnew)
+          console.log(author + 's ID is now: ' + authorIDnew)
         // Fetch ID of newly created Book
           db.get(sqlBook,(err2, row2) => {
             const bookIDnew = JSON.stringify(row2.id)

@@ -1,14 +1,14 @@
 function getbookratingsdata() {
     fetch('/api/books')
     .then(data => data.json())
-    .then(books => {ratings(books)})
+    .then(books => {ratings(books), categorydata(books)})
 }
 
-function getbookcategorydata() {
-    fetch('/api/books')
-    .then(data => data.json())
-    .then(books => {categorydata(books)})
-}
+// function getbookcategorydata() {
+//     fetch('/api/books')
+//     .then(data => data.json())
+//     .then(books => {categorydata(books)})
+// }
 
 function FillBooksCategories() {
     fetch('/api/books')
@@ -139,16 +139,9 @@ function categorydata(books) {
     });
 }
 
-function installOtherEventHandlers() {
-    // Events to open and close menus
-    // ...
-
-    // Events to call loadAndFillBooks with a new search value
-}
 
 window.onload = () => {
     FillBooksCategories()
-    installOtherEventHandlers()
     getbookratingsdata()
     getbookcategorydata()
 }

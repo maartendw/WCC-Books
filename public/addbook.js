@@ -7,7 +7,6 @@ function addNewBook(item) {
         body: JSON.stringify(item)
         
     })
-    console.log(item)
 }
 
 function FillBooksCategories() {
@@ -30,7 +29,6 @@ function getCategories(books){
         result.push(category);
     }
     }
-    console.log(result)
     
     const optionlist = document.getElementById("category_options")
 
@@ -66,7 +64,6 @@ function countCategories(books){
     const catsummary = document.getElementById("categorysummary")
 
     Object.keys(lookup).forEach(function(key) {
-    console.log(key + ',' + lookup[key])
     const li = document.createElement("li")
     li.innerText = key + ' (' + lookup[key] + ')'
     catsummary.append(li)
@@ -75,14 +72,6 @@ function countCategories(books){
   })    
 }
 
-function installOtherEventHandlers() {
-    // Events to open and close menus
-    // ...
-
-    // Events to call loadAndFillBooks with a new search value
-}
-
-// }
 
 window.onload = () => {
     FillCategories()
@@ -100,16 +89,12 @@ window.onload = () => {
             category: document.getElementById('newbookcategory').value
         }
 
-        console.log(newbook)
         addNewBook(newbook)
         myform.reset()
         
 })
 
-    installOtherEventHandlers()
 }
-
-
 
 //toggle for collapsable menus
 function togglefunction(id) {
